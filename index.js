@@ -2,21 +2,23 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 
 const dns = require("dns");
+const util = require("util");
 const validateEmail = require("@williamharrison/validate-email");
 
 try {
     const email = core.getInput("email");
+    const domain = email.split("@").pop();
+
     const validEmail = validateEmail(email);
 
     if(!validEmail) return core.setFailed("The email address does not match the correct format!");
 
     let mxRecords = null;
 
-    dns.resolveMx(email.split("@").pop(), function(err, addresses) {
-        mxRecords = addresses;
-    })
+    const getMXRecords = util.promisify(dns.resolveMx);
+    const mxRecords = getMXRecords(domain);
 
-    if(!mxRecords) return core.setFailed(`No MX records exist for the domain ${email.split("@").pop()}!`);
+    if(!mxRecords.length) return core.setFailed(`No MX records exist for the domain ${domain}!`);
 
     const result = {
         "success": true,
@@ -26,7 +28,7 @@ try {
             "mx_exists": true
         },
         "results": {
-            "domain": email.split("@").pop(),
+            "domain": domain,
             "mx_records": mxRecords
         }
     }
