@@ -4,7 +4,7 @@
   "description": "Check if an email address is valid.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build index.js --license licenses.txt"
+    "build": "ncc build index.js"
   },
   "repository": {
     "type": "git",
