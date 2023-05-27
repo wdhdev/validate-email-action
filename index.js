@@ -18,14 +18,14 @@ try {
     let mxRecords = null;
 
     dns.resolveMx(email.split("@").pop(), function(err, addresses) {
-        if(!addresses) return core.setFailed({
-            "success": false,
-            "email": email,
-            "test": "mx_exists",
-            "message": `No MX records exist for the domain ${email.split("@").pop()}!`
-        })
-
         mxRecords = addresses;
+    })
+
+    if(!mxRecords) return core.setFailed({
+        "success": false,
+        "email": email,
+        "test": "mx_exists",
+        "message": `No MX records exist for the domain ${email.split("@").pop()}!`
     })
 
     core.setOutput({
