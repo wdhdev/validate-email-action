@@ -9829,12 +9829,7 @@ try {
     const email = core.getInput("email");
     const validEmail = validateEmail(email);
 
-    if(!validEmail) return core.setFailed({
-        "success": false,
-        "email": email,
-        "test": "matches_format",
-        "message": "The email address does not match the correct format!"
-    })
+    if(!validEmail) return core.setFailed("The email address does not match the correct format!");
 
     let mxRecords = null;
 
@@ -9842,12 +9837,7 @@ try {
         mxRecords = addresses;
     })
 
-    if(!mxRecords) return core.setFailed({
-        "success": false,
-        "email": email,
-        "test": "mx_exists",
-        "message": `No MX records exist for the domain ${email.split("@").pop()}!`
-    })
+    if(!mxRecords) return core.setFailed(`No MX records exist for the domain ${email.split("@").pop()}!`);
 
     core.setOutput({
         "success": true,
