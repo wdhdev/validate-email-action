@@ -22,11 +22,10 @@ jobs:
               with:
                   node-version: 16
 
-            - name: Delete dist Folder
-              run: rm -rf dist
-
-            - name: Install @vercel/ncc
-              run: npm install -g @vercel/ncc
+            - name: Install Dependencies
+              run: |
+                  npm install
+                  npm install -g @vercel/ncc
 
             - name: Build
               run: ncc build index.js --license licenses.txt
