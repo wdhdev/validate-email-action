@@ -1,4 +1,4 @@
-name: Package
+name: Action
 
 on:
     push:
@@ -7,7 +7,7 @@ on:
     workflow_dispatch:
 
 concurrency:
-    group: ${{ github.ref }}-package
+    group: ${{ github.ref }}-action
     cancel-in-progress: true
 
 jobs:
