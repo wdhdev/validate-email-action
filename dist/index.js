@@ -2854,12 +2854,15 @@ async function action() {
         if(!email.match(emailRegex)) return core.setFailed("The email address does not match the correct format!");
 
         const getMXRecords = util.promisify(dns.resolveMx);
-        const mxRecords = await getMXRecords(domain);
+        let mxRecords = [];
+
+        try {
+            mxRecords = await getMXRecords(domain);
+        } catch {}
 
         if(!mxRecords.length) return core.setFailed(`No MX records exist for the domain ${domain}!`);
 
         const result = {
-            "success": true,
             "email": email,
             "test_results": {
                 "matches_format": true,
