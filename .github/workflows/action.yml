@@ -27,6 +27,9 @@ jobs:
               with:
                   node-version: 16
 
+            - name: Remove dist Directory
+              run: rm -rf dist
+
             - name: Install Dependencies
               run: |
                   npm install
