@@ -45,8 +45,5 @@ try {
     const payload = JSON.stringify(github.context.payload, undefined, 2);
     console.log(`The event payload: ${payload}`);
 } catch(err) {
-    core.setFailed({
-        "success": false,
-        "message": err.message
-    })
+    core.setFailed(err.message);
 }
