@@ -9823,21 +9823,21 @@ const core = __nccwpck_require__(8004);
 const github = __nccwpck_require__(8734);
 
 const dns = __nccwpck_require__(9523);
+const util = __nccwpck_require__(3837);
 const validateEmail = __nccwpck_require__(6085);
 
 try {
     const email = core.getInput("email");
+    const domain = email.split("@").pop();
+
     const validEmail = validateEmail(email);
 
     if(!validEmail) return core.setFailed("The email address does not match the correct format!");
 
-    let mxRecords = null;
+    const getMXRecords = util.promisify(dns.resolveMx);
+    const mxRecords = getMXRecords(domain);
 
-    dns.resolveMx(email.split("@").pop(), function(err, addresses) {
-        mxRecords = addresses;
-    })
-
-    if(!mxRecords) return core.setFailed(`No MX records exist for the domain ${email.split("@").pop()}!`);
+    if(!mxRecords.length) return core.setFailed(`No MX records exist for the domain ${domain}!`);
 
     const result = {
         "success": true,
@@ -9847,7 +9847,7 @@ try {
             "mx_exists": true
         },
         "results": {
-            "domain": email.split("@").pop(),
+            "domain": domain,
             "mx_records": mxRecords
         }
     }
