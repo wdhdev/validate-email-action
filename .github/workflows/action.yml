@@ -3,6 +3,11 @@ name: Action
 on:
     push:
         branches: [main]
+        paths:
+            - "action.yml"
+            - "index.js"
+            - "package.json"
+            - "package-lock.json"
 
     workflow_dispatch:
 
