@@ -3,9 +3,9 @@ Check if an email address is valid.
 
 ## Example Usage
 ```yaml
-uses: wdhdev/email-validator@main
-with:
-  email: "example@google.com"
+- uses: wdhdev/email-validator@main
+  with:
+    email: "example@google.com"
 ```
 
 ## Inputs
