@@ -2,7 +2,7 @@
   "name": "email-validator",
   "version": "1.0.0",
   "description": "Check if an email address is valid.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wdhdev/email-validator.git"
