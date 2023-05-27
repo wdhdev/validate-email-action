@@ -1,4 +1,4 @@
-# Email Validator Action
+# Validate Email Action
 Check if an email address is valid.
 
 ## Example Usage

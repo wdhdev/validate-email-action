@@ -1,4 +1,4 @@
-name: Email Validator
+name: Validate Email
 description: "Check if an email address is valid."
 inputs:
     email:
