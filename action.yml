@@ -1,5 +1,7 @@
 name: Validate Email
 description: "Check if an email address is valid."
+icon: mail
+color: orange
 inputs:
     email:
         description: "The email address to test."
