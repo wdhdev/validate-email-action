@@ -4,7 +4,10 @@ on:
     push:
         branches: [main]
         paths:
-            - "/*.js"
+            - "dist/"
+            - "*.js"
+            - "package.json"
+            - "package-lock.json"
 
     workflow_dispatch:
 
