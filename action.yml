@@ -1,14 +1,15 @@
 name: Validate Email
 description: "Check if an email address is valid."
-icon: mail
-color: orange
+branding:
+    icon: "mail"
+    color: "green"
 inputs:
     email:
-        description: "The email address to test."
+        description: "The email address to validate."
         required: true
 outputs:
     result:
-        description: "The result of the test."
+        description: "The result of the validation."
 runs:
     using: "node16"
     main: "dist/index.js"
