@@ -40,5 +40,5 @@ jobs:
                   git config --global user.email "bot@williamharrison.dev"
                   git config --global user.name "WDH-Bot"
                   git add dist/
-                  git commit -m "chore: build package"
+                  git commit -m "chore: build action"
                   git push
