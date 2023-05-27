@@ -1,18 +1,15 @@
 const core = require("@actions/core");
-const github = require("@actions/github");
-
 const dns = require("dns");
 const util = require("util");
-const validateEmail = require("@williamharrison/validate-email");
 
 async function action() {
     try {
         const email = core.getInput("email");
         const domain = email.split("@").pop();
 
-        const validEmail = validateEmail(email);
+        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-        if(!validEmail) return core.setFailed("The email address does not match the correct format!");
+        if(!email.match(emailRegex)) return core.setFailed("The email address does not match the correct format!");
 
         const getMXRecords = util.promisify(dns.resolveMx);
         const mxRecords = await getMXRecords(domain);
