@@ -1,0 +1,40 @@
+name: Package
+
+on:
+    push:
+        branches: [main]
+
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.ref }}-package
+    cancel-in-progress: true
+
+jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+
+            - name: Delete dist Folder
+              run: rm -rf dist
+
+            - name: Install @vercel/ncc
+              run: npm install -g @vercel/ncc
+
+            - name: Build
+              run: ncc build index.js --license licenses.txt
+
+            - name: Commit
+              run: |
+                  git config --global user.email "bot@williamharrison.dev"
+                  git config --global user.name "WDH-Bot"
+                  git add index.json
+                  git commit -m "chore: build package"
+                  git push
