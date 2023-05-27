@@ -13,8 +13,6 @@ try {
 
     if(!validEmail) return core.setFailed("The email address does not match the correct format!");
 
-    let mxRecords = null;
-
     const getMXRecords = util.promisify(dns.resolveMx);
     const mxRecords = getMXRecords(domain);
 
