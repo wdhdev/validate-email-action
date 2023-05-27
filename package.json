@@ -1,0 +1,27 @@
+{
+  "name": "email-validator",
+  "version": "1.0.0",
+  "description": "Check if an email address is valid.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wdhdev/email-validator.git"
+  },
+  "keywords": [
+    "github",
+    "action",
+    "github-action"
+  ],
+  "author": "William Harrison <william@williamharrison.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wdhdev/email-validator/issues"
+  },
+  "homepage": "https://github.com/wdhdev/email-validator#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "@williamharrison/validate-email": "^1.0.1"
+  },
+  "devDependencies": {}
+}

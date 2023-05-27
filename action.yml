@@ -1,0 +1,12 @@
+name: Email Validator
+description: "Check if an email address is valid."
+inputs:
+    email:
+        description: "The email address to test."
+        required: true
+outputs:
+    result:
+        description: "The result of the test."
+runs:
+    using: "node16"
+    main: "index.js"
