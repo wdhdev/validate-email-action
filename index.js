@@ -18,7 +18,7 @@ try {
 
     // if(!mxRecords) return core.setFailed(`No MX records exist for the domain ${email.split("@").pop()}!`);
 
-    core.setOutput({
+    core.setOutput("result", {
         "success": true,
         "email": email,
         "test_results": {
