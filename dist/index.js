@@ -9831,24 +9831,24 @@ try {
 
     if(!validEmail) return core.setFailed("The email address does not match the correct format!");
 
-    let mxRecords = null;
+    // let mxRecords = null;
 
-    dns.resolveMx(email.split("@").pop(), function(err, addresses) {
-        mxRecords = addresses;
-    })
+    // dns.resolveMx(email.split("@").pop(), function(err, addresses) {
+        // mxRecords = addresses;
+    // })
 
-    if(!mxRecords) return core.setFailed(`No MX records exist for the domain ${email.split("@").pop()}!`);
+    // if(!mxRecords) return core.setFailed(`No MX records exist for the domain ${email.split("@").pop()}!`);
 
     core.setOutput({
         "success": true,
         "email": email,
         "test_results": {
-            "matches_format": true,
-            "mx_exists": true
+            "matches_format": true /* , */
+            // "mx_exists": true
         },
         "results": {
-            "domain": email.split("@").pop(),
-            "mx_records": mxRecords
+            // "domain": email.split("@").pop(),
+            // "mx_records": mxRecords
         }
     })
 
