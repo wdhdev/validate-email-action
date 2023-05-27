@@ -1,6 +1,6 @@
 {
   "name": "validate-email",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Check if an email address is valid.",
   "main": "dist/index.js",
   "scripts": {
