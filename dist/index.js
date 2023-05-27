@@ -9826,37 +9826,41 @@ const dns = __nccwpck_require__(9523);
 const util = __nccwpck_require__(3837);
 const validateEmail = __nccwpck_require__(6085);
 
-try {
-    const email = core.getInput("email");
-    const domain = email.split("@").pop();
+async function action() {
+    try {
+        const email = core.getInput("email");
+        const domain = email.split("@").pop();
 
-    const validEmail = validateEmail(email);
+        const validEmail = validateEmail(email);
 
-    if(!validEmail) return core.setFailed("The email address does not match the correct format!");
+        if(!validEmail) return core.setFailed("The email address does not match the correct format!");
 
-    const getMXRecords = util.promisify(dns.resolveMx);
-    const mxRecords = getMXRecords(domain);
+        const getMXRecords = util.promisify(dns.resolveMx);
+        const mxRecords = await getMXRecords(domain);
 
-    if(!mxRecords.length) return core.setFailed(`No MX records exist for the domain ${domain}!`);
+        if(!mxRecords.length) return core.setFailed(`No MX records exist for the domain ${domain}!`);
 
-    const result = {
-        "success": true,
-        "email": email,
-        "test_results": {
-            "matches_format": true,
-            "mx_exists": true
-        },
-        "results": {
-            "domain": domain,
-            "mx_records": mxRecords
+        const result = {
+            "success": true,
+            "email": email,
+            "test_results": {
+                "matches_format": true,
+                "mx_exists": true
+            },
+            "results": {
+                "domain": domain,
+                "mx_records": mxRecords
+            }
         }
-    }
 
-    console.log(result);
-    core.setOutput("result", result);
-} catch(err) {
-    core.setFailed(err.message);
+        console.log(result);
+        core.setOutput("result", result);
+    } catch(err) {
+        core.setFailed(err.message);
+    }
 }
+
+action()
 
 })();
 
